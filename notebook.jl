@@ -4,10 +4,8 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 3e918ac6-a3f2-463a-bae3-4b49a1c79a0b
-md"""
-# Programming for Scientists Workshop!
-"""
+# ╔═╡ 26746842-452b-11ee-11bc-99241d6fb2a6
+
 
 # ╔═╡ Cell order:
-# ╟─3e918ac6-a3f2-463a-bae3-4b49a1c79a0b
+# ╠═26746842-452b-11ee-11bc-99241d6fb2a6
