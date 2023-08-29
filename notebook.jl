@@ -1,6 +1,14 @@
 ### A Pluto.jl notebook ###
 # v0.19.27
 
+#> [frontmatter]
+#> author_url = "https://github.com/M-PERSIC"
+#> image = "assets/Pluto_Banner.png"
+#> tags = ["workshop", "tutorial", "programming", "science"]
+#> author_name = "Michael Persico"
+#> description = "Programming for Scientists Workshop (Fall 2023) by the Biology Student Association (BSA Concordia)"
+#> license = "Unlicense"
+
 using Markdown
 using InteractiveUtils
 
