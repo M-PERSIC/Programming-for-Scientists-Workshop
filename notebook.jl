@@ -3,7 +3,7 @@
 
 #> [frontmatter]
 #> author_url = "https://github.com/M-PERSIC"
-#> image = "assets/Pluto_Banner.png"
+#> image = "https://github.com/M-PERSIC/Programming-for-Scientists-Workshop/blob/4926f8dab735045fd514cffebfa8cb76ce87a4ba/assets/Pluto_Banner.png"
 #> tags = ["workshop", "tutorial", "programming", "science"]
 #> author_name = "Michael Persico"
 #> description = "Programming for Scientists Workshop (Fall 2023) by the Biology Student Association (BSA Concordia)"
@@ -19,12 +19,12 @@ using Test
 md"""
 # Welcome to Programming for Scientists!
 
-Presented by **Michael Persico** of the Concordia University **Biology Student Association (BSA)**
+Presented by **Michael Persico** of the **Biology Student Association (Concordia University)**
 
 **Source**: [github.com/M-PERSIC/Programming-for-Scientists-Workshop.git](https://github.com/M-PERSIC/Programming-for-Scientists-Workshop.git)
 
 > **Note**
-> This workshop is the second part of the "Computers/Programming for Scientists" double workshop. The first part, "Computers for Scientists", was presented separately and thus some concepts are not repeated in order to conserve time. The link to the previous presentation is here: 
+> This workshop is the second part of the "Computers/Programming for Scientists" double workshop. The first part, "Computers for Scientists", was presented separately and thus some concepts are not repeated in order to conserve time. The presentation slides can be found in the source link above.
 """
 
 # ╔═╡ 7e63c1e0-7627-4d26-bc01-21332de6be16
@@ -72,9 +72,9 @@ We are in what is known as a **notebook**! Specifically, it is a **WYSIWYG** (Wh
 This specific environment is called a [Pluto](https://plutojl.org/) notebook, which is designed for Julia. Julia is a relatively new programming language with excellent features for scientific computing. It is also great for teaching due to it being high-level and easy to read and write.
 
 > **Note**
-> Some cells include a `begin ... end` block. These are only necessary for Pluto and are not needed for regular Julia code.
+> Some cells include a `begin ... end` block. These are only necessary for Pluto due to certain restrictions and can be removed when running Julia on its own.
 
-Certain sections include code examples that you can run and manipulate, along with some exercises that we will work on together.  
+Certain sections include code examples that you can run and manipulate, along with exercises that we will work on together.  
 """
 
 # ╔═╡ 9cec5f6d-3957-452b-898d-233bd44c77ec
@@ -157,13 +157,45 @@ Some languages include more specific number types. With Julia, there are at leas
 
 `BigInt` is a special type that can represent almost any large number, at the cost of performance. We usually stick to `Int64` since it represents most numbers for our needs (any number within -$2^{63}$ and $2^{63}$).
 
-> **_NOTE:_**  In Julia, `Int` is an **alias type** (alternative name) for `Int64`
+> **NOTE**  
+> In Julia, `Int` is an **alias type** (alternative name) for `Int64`
 
+**Strings** are sequences made up of **characters**, the letters of the alphabet or other symbols we use in writing. Strings are encoded via two double quotation marks:
+"""
+
+# ╔═╡ a00fe1dc-8a89-4d0d-8247-62106780a7ca
+begin
+	str = "wow"
+	# A character in Julia is represented as a Char type. Therefore, a String is 
+	# a container type (see below) made up of Char values!
+	character = 'w'
+	str2 = string(['w', 'o', 'w']) 
+end
+
+# ╔═╡ 977bf229-f824-4362-a86f-b705d872a91d
+md"""
+Each character symbol in a language is represented by a specific number. There are defined standards, such as Unicode, that formalize this relationship between languages. Julia, by default, encodes characters according to UTF-8, meaning as a sequence of 8 bytes, or 64 bits.
+
+We will see one more type of primitive (booleans) further below.
 """
 
 # ╔═╡ 85707728-42c5-466c-8a11-5f2c8a64a5ce
 md"""
 ### container types 
+
+Container types, also known as collections, are types that holds values other types. We just saw an example with strings, which can be considered containers of characters. 
+"""
+
+# ╔═╡ ea1b2857-190d-4eff-9eb1-e72aa9c1b59a
+begin
+	collection = [1,2,3]
+	# Is the same as `collection`
+	collection2 = 1:3
+end
+
+# ╔═╡ f6dfc7bc-8c0a-4681-b733-82aa74aae52e
+md"""
+The most common container type in Julia is a `Vector`, which is an example of a 1-dimensional `Array` with variable length (**arrays** are containers with a fixed amount of values). There are also matrices, dataframes, and many others.
 """
 
 # ╔═╡ 1d2dfcc5-a2ff-4577-9643-e96cf67813f3
@@ -204,7 +236,7 @@ p1.x = 2
 
 # ╔═╡ 0e1a55a1-e787-4b9d-b490-a6eb7af7af86
 md"""
-Look at the `sefield!` error. Some languages, like Julia, set structs to be **immutable** by default, meaning we are not allowed to change the values. We would have to create new `Point` objects if we need updated coordinates. We can create mutable structs with the `mutable` keyword, but before we do... 
+Look at the `sefield!` error. Some languages, like Julia, set structs to be **immutable** by default, meaning we are not allowed to change the field values. We would have to create new `Point` objects if we need updated coordinates. We can create mutable structs with the `mutable` keyword, but before we do... 
 """
 
 # ╔═╡ 6a95b42a-28ab-4368-a13a-954d2c6c2aca
@@ -307,59 +339,202 @@ end
 # ╔═╡ 5794cee0-f387-4a03-9516-281a7df48a86
 md"""
 ## Control Flow
+
+In almost every programming scenario, we will need to check that specific conditions have been met before we can execute certain code. These conditions are represented as **conditional statements**, which are instructions that check whether a condition holds true or false. This is achieved with **boolean types** (either `true` or `false`, `1` or `0`) which are also primitive types.
 """
+
+# ╔═╡ da59f8cd-35de-43b0-bd8e-762221c87e58
+md"""
+### Operators
+
+Special **operators**, meaning instructions contained in characters, can be used to check for conditions. Many times, we need to check if two conditions hold or not, these are known as **comparison operators**:
+
+> **Note**
+> We already saw one example of an operator previously: the `=` operator, also called the **assignment operator**!
+"""
+
+# ╔═╡ 5e1dc65c-71fe-496d-9922-953c1d6741f2
+begin
+	condition_holds::Bool = true
+	condition_does_not_hold::Bool = false
+
+	# the `!` operator returns the opposite condition
+	condition_is_reversed = !(condition_holds) # returns the opposite of true (false)
+	
+	# && is the logical AND operator. This operator combines two
+	# conditions into one based on whether both conditions hold true 
+	# or not 
+	true && true # true
+	true && false # false
+	false && true # false
+	false && false # false
+
+	# || is the logical OR operator. If at least one condition
+	# holds true, then the combined condition holds true 
+	true || true # true
+	true || false # true
+	false || true # true
+	false || false # false
+
+	# Examples of other comparison operators
+	1 < 2 # true, since 1 is smaller than 2
+	1 > 2 # false, since 1 is NOT larger than 2
+	1 <= 2 # true, since 1 is smaller than 2
+	2 <= 2 # true, since 2 is equal to 2
+	1 >= 2 # false, since 1 is neither larger than or equal to 2
+	2 >= 2 # true, since 2 is equal to 2
+end
+
+# ╔═╡ 0868f871-3646-4821-8471-058c92241191
+md"""
+There are many more operators that exist, many of which exist to simplify certain common tasks:
+"""
+
+# ╔═╡ 19a15137-839e-49db-8b1e-0f3bdb6473b9
+begin
+	num = 1; println(num)
+	num += 2; println(num) # same as num = num + 10 (addition)
+	num -= 1; println(num) # same as num = num - 2 (subtraction)
+	num /= 2; println(num) # same as num = num / 9 (division)
+	num *= 10; println(num) # same as num = num * 9 (multiplication)
+	num ^= 2; println(num) # same as num = num^2 (exponentiation)
+end
 
 # ╔═╡ c1ac1a00-cdb0-4b85-9b4b-3d2fa665e4b9
 md"""
 ### if/else loop
+
+A **loop** represents a specific instruction to either _select_ or _repeat_ other instructions depending on one or many conditions.
+
+By far the most common kind of loop is **if/else**, which allows for selecting which code to execute depending on a set of conditions:
+
 """
 
 # ╔═╡ 9358f4df-012e-45cf-b6b9-02dd9ee748fe
-
+begin
+	word = "meuw"
+	if word == "miaow"
+		println("Wrong!")
+	elseif word == "meuw"
+		println("You got it!")
+	elseif word == "maow"
+		println("Wrong!")
+	else
+		println("Wrong!")
+	end
+end
 
 # ╔═╡ c809a5a9-ec5b-4f92-891d-5920fd7e5027
 md"""
 ### for loop
+
+The **for loop** allows for **iterating**, or repeating over, a number of elements. For example, if we want to print every element in a container type:
 """
 
 # ╔═╡ 62a0c7f0-fdd3-4b2e-9006-0bdd7eb86ca2
-
+begin
+	another_container = [1,2,3]
+	for num in another_container
+		println(num)
+	end
+end
 
 # ╔═╡ a739a50e-417b-475f-98ee-1092f2ee2426
 md"""
 ### while loop
+
+The `if/else` and `for` loops are the two most fundamental loops in almost every programming language. In fact, some languages, such as Go, _only_ have these two loops. Here is one more example, called the **while loop**, which is best suited for continuously iterating over code with a condition that lasts until it no holds true no longer:
 """
 
-# ╔═╡ be07d54e-ca78-4d29-a5bc-5973437affdd
+# ╔═╡ d997dfd1-ccb7-437d-ac46-f5ffe05e6e4c
+begin
+	i = 1
+	while i < 10
+		println(i)
+		i += 1
+	end
+end
 
-
-# ╔═╡ 89d6bf19-44e6-4384-8a42-8066a9196dd6
+# ╔═╡ c00fdd3b-ecc7-4182-b909-7845606184b2
 md"""
-### error handling
+Be **very** careful with the while loop or other loops, since if you do not eventually have the condition fail, you will have what is known as an **infinite loop** which will continue forever and eventually crash your device!
 """
 
-# ╔═╡ 61565bf6-b688-4ffa-a43f-73f631ea8480
+# ╔═╡ 921c48a1-fd9d-478e-b5fd-5361d41c7f0a
+# This is an example of an infinite loop. Since we have no way of allowing
+# the condition to fail (it is ALWAYS true), the loop will go on and on until
+# bad things happen.
+# Do not uncomment this cell!
 
+#while true
+#	println("I CAN LIVE FOREVER!")
+#end
 
 # ╔═╡ 858aa086-21bf-4a66-94ec-b4e76834778e
 md"""
 ## Functions
+
+**Functions** are self-contained blocks of code that can be called and executed. We can provide **arguments** or inputs and can expect the function to either return an **output** or do _something_ we want (print, change a file, etc.).
+"""
+
+# ╔═╡ c3312918-2bb2-4b68-812e-e14dc211f7e4
+begin
+	# This function does absolutely nothing
+	function nothing_happens() end
+	
+	# This function prints "Hello World!" but does return anything
+	function hello_world()
+		println("Hello World!")
+	end
+	
+	# This function adds 2 to an argument we provide
+	function add_2(num)
+		return num + 2
+	end
+	
+	# This function adds 3 to an argument we provide that we have declared
+	# via a type declaration to be of type Int
+	function add_3(num::Int)
+		return num + 3
+	end
+	
+	# This function adds two arguments of type Int together and returns the
+	# result. We have also declared the type of the return value in this case
+	function add_4(num1::Int, num2::Int)::Int
+		return num1 + num2
+	end
+	
+	# This is another way to write a one-line function
+	add_5(num1::Int, num2::Int) = num1 + num2
+end
+
+# ╔═╡ 4670652b-653c-407c-a031-dbd97c41ffc4
+md"""
+> **Note**
+> In Julia, every line of code, or **statement**, is an **expression**, meaning that they always return _something_ even when we do not declare such. Therefore, the `hello_world()` function does return a value, but that value is of type `Nothing`, meaning there is an absence of any value being returned.
 """
 
 # ╔═╡ d8a685c6-7325-44f2-8da0-a9cdbc6cb757
 md"""
 ## Recursion
+
+Recursion is recursion is recursion is... More specifically, recursion is when a function calls itself until it reaches a base case:
 """
 
-# ╔═╡ 4c92f471-8c70-4f5a-9dda-be6efc686fbc
-md"""
-## Input/Output (I/O)
-"""
+# ╔═╡ 0dc7ae4f-4195-4e77-ab7d-d49df9e0792b
+# Fibonacci numbers are a series of numbers where each number is the sum 
+# of two preceding numbers (1, 1, 2, 3, 5, 8, 13,...). This function returns 
+# the nth Fibonacci number by calling itself until 
+function fibonacci(n::Int)::Union{Nothing, Int}
+	(n < 0) && return nothing
+	(n == 0 || n == 1) && return 1
+	return fib(n - 1) + fib(n - 2)
+end
 
-# ╔═╡ 267780e2-534a-4038-999c-078b1c753daa
+# ╔═╡ 45446224-d43e-44df-8606-e1358a049ad8
 md"""
-## Packages/Libraries
-
+![Fibonacci diagram](https://understanding-recursion.readthedocs.io/en/latest/_images/fib(3).jpg)
+In the function above, `Union` is a special type that can represent multiple values at once (the return type can be either `Int` or `Nothing`).
 """
 
 # ╔═╡ 1129fabc-6593-47f1-9c6a-a435fdc910a8
@@ -375,7 +550,7 @@ For the final section, we will be performing a simple exercise that can be found
 md"""
 ### FizzBuzz! 
 
-FizzBuzz is a word game that is meant to teach schoolchildren how division works. This is a simpler version of the game, BUT like in the original there is a little pitfall that catches many new programmers by surprise!
+FizzBuzz is a word game that is meant to teach how division works. This is a simpler version of the game, BUT like in the original there is a little pitfall that catches many new programmers by surprise!
 
 Given an integer `n`, return a specific string based on the following conditions:
 
@@ -386,8 +561,7 @@ Given an integer `n`, return a specific string based on the following conditions
 
 
 > **Hint**
-> Programming languages _iterate_ over each line from top to bottom. Therefore in your `if/else` loop, watch out for which condition is evaluated first!
-
+> Programming languages _iterate_ over each line from top to bottom. Therefore in your `if/else` loop, watch out for which condition is checked first by the program!
 """
 
 # ╔═╡ 83642231-26c5-403d-8eb6-4d4ed65f1040
@@ -448,7 +622,7 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 """
 
 # ╔═╡ Cell order:
-# ╠═26746842-452b-11ee-11bc-99241d6fb2a6
+# ╟─26746842-452b-11ee-11bc-99241d6fb2a6
 # ╟─7e63c1e0-7627-4d26-bc01-21332de6be16
 # ╟─5c18083b-b530-4e75-b70d-0bf47c0cf3a2
 # ╟─f603f377-8697-4d09-8610-c9369501a857
@@ -464,7 +638,11 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─71fef82f-5494-480c-a825-76771b7383f8
 # ╠═797670e0-443e-4cb3-bdb3-ca8fc1b9c288
 # ╟─f7ce7abd-cbe9-45be-b36d-d80f4fe3171c
-# ╠═85707728-42c5-466c-8a11-5f2c8a64a5ce
+# ╠═a00fe1dc-8a89-4d0d-8247-62106780a7ca
+# ╟─977bf229-f824-4362-a86f-b705d872a91d
+# ╟─85707728-42c5-466c-8a11-5f2c8a64a5ce
+# ╠═ea1b2857-190d-4eff-9eb1-e72aa9c1b59a
+# ╟─f6dfc7bc-8c0a-4681-b733-82aa74aae52e
 # ╟─1d2dfcc5-a2ff-4577-9643-e96cf67813f3
 # ╠═ae27464d-53e2-4dde-a36f-9a872be109a5
 # ╟─19898457-a9ab-413c-b917-7fcb500d8a9b
@@ -482,19 +660,25 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╠═898f79af-b5bf-47b7-9528-e39dd058b021
 # ╟─d39f9e89-7a4c-4749-b7b1-014f6d7ed241
 # ╠═87215b16-287c-4c3b-bf66-d14c8a90b1d9
-# ╠═5794cee0-f387-4a03-9516-281a7df48a86
-# ╠═c1ac1a00-cdb0-4b85-9b4b-3d2fa665e4b9
+# ╟─5794cee0-f387-4a03-9516-281a7df48a86
+# ╟─da59f8cd-35de-43b0-bd8e-762221c87e58
+# ╠═5e1dc65c-71fe-496d-9922-953c1d6741f2
+# ╟─0868f871-3646-4821-8471-058c92241191
+# ╠═19a15137-839e-49db-8b1e-0f3bdb6473b9
+# ╟─c1ac1a00-cdb0-4b85-9b4b-3d2fa665e4b9
 # ╠═9358f4df-012e-45cf-b6b9-02dd9ee748fe
-# ╠═c809a5a9-ec5b-4f92-891d-5920fd7e5027
+# ╟─c809a5a9-ec5b-4f92-891d-5920fd7e5027
 # ╠═62a0c7f0-fdd3-4b2e-9006-0bdd7eb86ca2
 # ╠═a739a50e-417b-475f-98ee-1092f2ee2426
-# ╠═be07d54e-ca78-4d29-a5bc-5973437affdd
-# ╠═89d6bf19-44e6-4384-8a42-8066a9196dd6
-# ╠═61565bf6-b688-4ffa-a43f-73f631ea8480
-# ╠═858aa086-21bf-4a66-94ec-b4e76834778e
-# ╠═d8a685c6-7325-44f2-8da0-a9cdbc6cb757
-# ╠═4c92f471-8c70-4f5a-9dda-be6efc686fbc
-# ╠═267780e2-534a-4038-999c-078b1c753daa
+# ╠═d997dfd1-ccb7-437d-ac46-f5ffe05e6e4c
+# ╠═c00fdd3b-ecc7-4182-b909-7845606184b2
+# ╠═921c48a1-fd9d-478e-b5fd-5361d41c7f0a
+# ╟─858aa086-21bf-4a66-94ec-b4e76834778e
+# ╠═c3312918-2bb2-4b68-812e-e14dc211f7e4
+# ╟─4670652b-653c-407c-a031-dbd97c41ffc4
+# ╟─d8a685c6-7325-44f2-8da0-a9cdbc6cb757
+# ╠═0dc7ae4f-4195-4e77-ab7d-d49df9e0792b
+# ╟─45446224-d43e-44df-8606-e1358a049ad8
 # ╟─1129fabc-6593-47f1-9c6a-a435fdc910a8
 # ╟─73b9c0f6-456e-4929-bd78-6f982258e19c
 # ╟─8cd75e7b-3111-4d5a-ae02-18f913cd242e
