@@ -67,14 +67,14 @@ Along the way, new types of programming languages came about such as **markup la
 md"""
 ## How does this work?
 
-We are in what is known as a **notebook**! Specifically, it is a **WYSIWYG** (What You See Is What You Get) environment for working with code within individual blocks known as _cells_. You can add, remove, or manipulate any cell, which will help you learn with a more hands-on approach. You can even download this notebook and share it with your friends, see the export button at the top right!
+We are in what is known as a **notebook**! Specifically, it is a **WYSIWYG** (What You See Is What You Get) environment for working with code within individual blocks known as _cells_. You can add, remove, or manipulate any cell, which will help you learn with a more hands-on approach. Run the cell either via clicking the "Run cell" button at the bottom right of each cell or via the `SHIFT + ENTER` command. You can even download this notebook and share it with your friends via the export button at the top right!
 
 This specific environment is called a [Pluto](https://plutojl.org/) notebook, which is designed for Julia. Julia is a relatively new programming language with excellent features for scientific computing. It is also great for teaching due to it being high-level and easy to read and write.
 
 > **Note**
 > Some cells include a `begin ... end` block. These are only necessary for Pluto due to certain restrictions and can be removed when running a Julia program on its own.
 
-Certain sections include code examples, and there will be an exercise that we will work on together near the end.  
+Certain sections include code examples, and there will be an exercise that we will work on together near the end. On the bottom right is the **Live Docs** feature with which you can look at the official documentation for keywords and other parts of the language.
 """
 
 # ╔═╡ 9cec5f6d-3957-452b-898d-233bd44c77ec
