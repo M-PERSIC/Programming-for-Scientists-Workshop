@@ -71,6 +71,9 @@ We are in what is known as a **notebook**! Specifically, it is a **WYSIWYG** (Wh
 
 This specific environment is called a [Pluto](https://plutojl.org/) notebook, which is designed for Julia. Julia is a relatively new programming language with excellent features for scientific computing. It is also great for teaching due to it being high-level and easy to read and write.
 
+> **Note**
+> Some cells include a `begin ... end` block. These are only necessary for Pluto and are not needed for regular Julia code.
+
 Certain sections include code examples that you can run and manipulate, along with some exercises that we will work on together.  
 """
 
@@ -173,7 +176,7 @@ md"""
 # ╔═╡ ae27464d-53e2-4dde-a36f-9a872be109a5
 struct Point
 	x::Int
-	y::Int=3
+	y::Int
 end
 
 # ╔═╡ 19898457-a9ab-413c-b917-7fcb500d8a9b
@@ -186,8 +189,7 @@ Notice that we added `::Int` to each field. These are known as **type declaratio
 # ╔═╡ 7b9445c4-5f32-40fa-badb-59bd2d5b6887
 begin
 	p1 = Point(1,2)
-	println("x = ", p1.x)
-	println("y = ", p1.y)
+	println("p1(Point): x = ", p1.x, ", y= ", p1.y)
 end
 
 # ╔═╡ c120e2bb-91f3-402c-ba79-5e3e794c48e5
@@ -233,7 +235,7 @@ end
 md"""
 The further away from the supertype, the more specific the type is. While we could simply declare everything as `Any`, this will cause problems for us further down the road. What if we want to have _some_ degree of control over what types can be allowed? Basically, what if we can restrict the type, such as declaring "the type can be any type of number"? 
 
-Generics is a fancy term for a "parameterized type", which is to say **what types a type can be.** Another way to create a container of type `Any` is:
+Generics is a fancy term for a "parameterized type", which is to say **what type(s) a type can be.** Another way to create a container of type `Any` is:
 """
 
 # ╔═╡ 6c454cda-6711-471c-9f67-46f6046acb95
@@ -265,7 +267,7 @@ end
 
 # ╔═╡ d39f9e89-7a4c-4749-b7b1-014f6d7ed241
 md"""
-To expand on the comments for `container6`, the language, in the face of elements of differing types, will first try to promote all elements to a common type that can represent every element as accurately as possible. Floats can represent the integer 1 as 1.0, however with integers we would have to convert, say, 1.1 to 1, which means we would lose information. Only if it cannot promote all elements without losing information will it default to `Any`.
+To expand on the comment for `container6`, the language, in the face of elements of differing types, some languages, like Julia, will first try to promote all elements to a common type that can represent every element as accurately as possible. Floats can represent the integer 1 as 1.0, however with integers we would have to convert, say, 1.1 to 1, which means we would lose information. Only if it cannot promote all elements without losing information will Julia default to `Any`.
 
 With generics, we can expand our `Point` struct to include multiple kinds of coordinates, not just those using whole numbers. Let us define a new struct called `Point2` that include any kind of number AND is mutable so that we can change object coordinates:
 """
@@ -280,7 +282,7 @@ begin
 	p2 = Point2(3.1, 4.2)
 	p2.x = 10.8
 
-	println("Point2: x = ", p2.x, ", y = ", p2.y)
+	println(p2)
 
 	# We can get a little bit crazier and include multiple parameterized types!
 	struct Point3{T <: Number, U <: Number}
@@ -289,12 +291,17 @@ begin
 	end
 
 	p3 = Point3(3, 4.1)
-	println("Point3: x = ", p3.x, ", y = ", p3.y)
+	println(p3)
 
 	# One more :)
-	struct Point4{T <: Complex, U <: AbstractFloat, V <: Integer}
-		x::T
-		y::
+	@kwdef struct Point4{T <: Complex, U <: AbstractFloat, V <: Integer}
+		x::T = 2im
+		y::U = 48.7
+		z::V = 1
+	end
+
+	p4 = Point4(x = 3.7im, z = Int16(2))
+	println(p4)
 end
 
 # ╔═╡ 5794cee0-f387-4a03-9516-281a7df48a86
@@ -452,7 +459,6 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─eeef418b-465d-4643-8f89-f04dd820e1b9
 # ╠═b18387c5-f0aa-4a67-9826-665bcacec2ff
 # ╟─529eda59-76ee-4446-853f-be2774e08992
-# ╠═e191d28c-d534-46c2-96ee-95b7280ac9df
 # ╟─4624fe4b-4f0d-48f4-9bee-44546e2e4144
 # ╠═62a2d5be-261e-413f-9879-9ecb6214ac50
 # ╟─71fef82f-5494-480c-a825-76771b7383f8
@@ -468,13 +474,13 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─0e1a55a1-e787-4b9d-b490-a6eb7af7af86
 # ╟─6a95b42a-28ab-4368-a13a-954d2c6c2aca
 # ╠═c5994f47-fcb9-4a8c-a975-e668a605a489
-# ╠═4ff97b5e-38d3-466a-8b25-1058c0650841
+# ╟─4ff97b5e-38d3-466a-8b25-1058c0650841
 # ╠═0989d007-7085-434d-9dfb-f84115635c38
-# ╠═47fa73d0-5116-4cc1-9a7f-03c12a733c4f
+# ╟─47fa73d0-5116-4cc1-9a7f-03c12a733c4f
 # ╠═6c454cda-6711-471c-9f67-46f6046acb95
-# ╠═a15b5f76-0435-4ff6-b6f7-287e9ba39175
+# ╟─a15b5f76-0435-4ff6-b6f7-287e9ba39175
 # ╠═898f79af-b5bf-47b7-9528-e39dd058b021
-# ╠═d39f9e89-7a4c-4749-b7b1-014f6d7ed241
+# ╟─d39f9e89-7a4c-4749-b7b1-014f6d7ed241
 # ╠═87215b16-287c-4c3b-bf66-d14c8a90b1d9
 # ╠═5794cee0-f387-4a03-9516-281a7df48a86
 # ╠═c1ac1a00-cdb0-4b85-9b4b-3d2fa665e4b9
