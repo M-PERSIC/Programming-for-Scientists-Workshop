@@ -72,9 +72,9 @@ We are in what is known as a **notebook**! Specifically, it is a **WYSIWYG** (Wh
 This specific environment is called a [Pluto](https://plutojl.org/) notebook, which is designed for Julia. Julia is a relatively new programming language with excellent features for scientific computing. It is also great for teaching due to it being high-level and easy to read and write.
 
 > **Note**
-> Some cells include a `begin ... end` block. These are only necessary for Pluto due to certain restrictions and can be removed when running Julia on its own.
+> Some cells include a `begin ... end` block. These are only necessary for Pluto due to certain restrictions and can be removed when running a Julia program on its own.
 
-Certain sections include code examples that you can run and manipulate, along with exercises that we will work on together.  
+Certain sections include code examples, and there will be an exercise that we will work on together near the end.  
 """
 
 # ╔═╡ 9cec5f6d-3957-452b-898d-233bd44c77ec
@@ -83,13 +83,14 @@ md"""
 
 We need to explain a few concepts:
 
-- **Coder, developer, programmer**, etc. might have differing definitions depending on certain contexts, however they can be used interchangeably to signify someone who programs! There are alot of words which represent similar concepts in computer science with very nuanced differences, you will pick these up as you go along
-- A **program** represents an actual implementation of an **algorithm**, which represents a set of instructions that perform a specific task. The code of a program is represented as a series of lines from top to bottom with a mix of specific keywords and user-defined words that describe either the program itself or the code that makes up that program (**metaprogramming**)
+- **Coder, developer, programmer**, etc. might have differing definitions depending on certain contexts, however they can be used interchangeably to signify someone who programs! There are a lot of words which represent similar concepts in computer science with very nuanced differences, you will pick these up as you go along
+- A **program** represents a code implementation of an **algorithm**, which represents a set of instructions that perform a specific task. The code of a program is represented as a series of lines from top to bottom with a mix of specific keywords and user-defined words that describe either the program itself or the code that makes up that program (**metaprogramming**)
+- We try to code according to convention, based on best practices and the recommended **style guidelines** for a given language. These dictate where to put new code, how long the the line should be, etc.
 - A **comment** is a note within your program that can help explain certain concepts or pieces of code to yourself or to another programmer. They do NOT affect your program, but they will help better document your code. In Julia, we define a comment with a hashtag (`#`) at the beginning of a line like so:
 """
 
 # ╔═╡ 7f92b572-d0de-4a8a-ad5c-4a2ddc7ce7f6
-#This is a comment, nothing happens!
+# This is a comment, nothing happens!
 
 # ╔═╡ b7b8c1ea-4c0a-4b0d-937a-d46a20b96ea9
 md"""
@@ -121,18 +122,18 @@ A third step, called **assignment**, is when the value of a variable is changed:
 
 # ╔═╡ 4624fe4b-4f0d-48f4-9bee-44546e2e4144
 md"""
-These variables are **mutable** by default, meaning we can update the values. To make sure we cannot change the value tied to the variable, we can declare a **constant** variable:
+These variables are **mutable** by default, meaning we can update the values. To make sure we cannot change the value tied to the variable, we can declare the variable to be **constant**:
 """
 
 # ╔═╡ 62a2d5be-261e-413f-9879-9ecb6214ac50
 const y = 2
-#y = 3 or any other value will return an error!
+# y = 3 or any other value will return an error!
 
 # ╔═╡ 71fef82f-5494-480c-a825-76771b7383f8
 md"""
 ## Types
 
-**Types** represent the different kinds of data that can exist. Text and numbers can be considered to be data with different properties, for example. Let us explore some of the fundamental types that almost every language possesses!
+**Types** represent the different kinds of data that can exist. Text and numbers can be considered to be data with different properties, for example. Let us explore some of the fundamental types that almost every language possess!
 
 ### primitive types
 
@@ -160,7 +161,7 @@ Some languages include more specific number types. With Julia, there are at leas
 > **NOTE**  
 > In Julia, `Int` is an **alias type** (alternative name) for `Int64`
 
-**Strings** are sequences made up of **characters**, the letters of the alphabet or other symbols we use in writing. Strings are encoded via two double quotation marks:
+**Strings** are sequences made up of **characters**, the letters of the alphabet or other symbols we use in writing. Strings are encoded via two double quotation marks whilst characters are encoded with single quotation marks:
 """
 
 # ╔═╡ a00fe1dc-8a89-4d0d-8247-62106780a7ca
@@ -183,7 +184,7 @@ We will see one more type of primitive (booleans) further below.
 md"""
 ### container types 
 
-Container types, also known as collections, are types that holds values other types. We just saw an example with strings, which can be considered containers of characters. 
+Container types, also known as collections, are types that holds values of other types. We just saw an example with strings, which can be considered containers of characters. 
 """
 
 # ╔═╡ ea1b2857-190d-4eff-9eb1-e72aa9c1b59a
@@ -196,13 +197,37 @@ end
 # ╔═╡ f6dfc7bc-8c0a-4681-b733-82aa74aae52e
 md"""
 The most common container type in Julia is a `Vector`, which is an example of a 1-dimensional `Array` with variable length (**arrays** are containers with a fixed amount of values). There are also matrices, dataframes, and many others.
+
+The elements within a container type are usually accessible based on their **index**, or position within the container:
+"""
+
+# ╔═╡ 8465ef8b-8fee-42d6-9606-7dda73015708
+begin
+	# Grab the third character in the string
+	println("woah"[3])
+	
+	# Grab the last number in a vector
+	println([1,2,3][end])
+
+	# Grab the first character in a vector of characters
+	println(['w', 'o', 'w'][begin])
+
+	# Grab the middle vector within a vector of vectors :)
+	vec = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15]]
+	middle_position = Int(ceil(length(vec) / 2))
+	println(vec[middle_position])
+end
+
+# ╔═╡ 10bb3dac-047d-43ab-865b-b26a9a6ea0e0
+md"""
+One of the biggest language wars that continues to be fought to this day is between **0-based indexing** and **1-based indexing**, meaning does the first element of a collection start at position 0 or 1. The exact reasons for the former involve performance constraints in the early days of computers along with how each element within a container is internally represented by a 1-bit shift in the memory address from the previous element (some spooky stuff).
 """
 
 # ╔═╡ 1d2dfcc5-a2ff-4577-9643-e96cf67813f3
 md"""
 ### composite (product) types
 
-**Composite types**, also referred to as **structs** in some languages, are data types we can create that combine other data types together into one. For example, let's define a `Point` type which represents any point on a 2D plane (x and y coordinates): 
+**Composite types**, also referred to as **structs** in some languages, are data types we can create that combine other data types into one. For example, let's define a `Point` type which represents any point on a 2D plane (x and y coordinates): 
 """
 
 # ╔═╡ ae27464d-53e2-4dde-a36f-9a872be109a5
@@ -226,17 +251,18 @@ end
 
 # ╔═╡ c120e2bb-91f3-402c-ba79-5e3e794c48e5
 md"""
-Each instance of Point is known as an **object**, like `p1`, and we call the way in which we can access the fields of `p1` **dot notation**.
+Each instance of Point, such as `p1`, is known as an **object**, and we call the way in which we can access the fields of `p1` **dot notation**.
 
 Now let us see what happens if we try to update the values of `p1`:
 """
 
 # ╔═╡ 9627e9c7-d663-45ce-86db-ed5407b4ce3b
+# Try to change the x coordinate to 2
 p1.x = 2
 
 # ╔═╡ 0e1a55a1-e787-4b9d-b490-a6eb7af7af86
 md"""
-Look at the `sefield!` error. Some languages, like Julia, set structs to be **immutable** by default, meaning we are not allowed to change the field values. We would have to create new `Point` objects if we need updated coordinates. We can create mutable structs with the `mutable` keyword, but before we do... 
+Look at the `sefield!` error. Some languages, like Julia, force structs to be **immutable** by default, meaning we are not allowed to change the field values. We would have to create new `Point` objects if we need updated coordinates. We can create mutable structs with the `mutable` keyword, but before we do... 
 """
 
 # ╔═╡ 6a95b42a-28ab-4368-a13a-954d2c6c2aca
@@ -251,7 +277,7 @@ container::Vector{Int} = [1, 2, 3.1]
 
 # ╔═╡ 4ff97b5e-38d3-466a-8b25-1058c0650841
 md"""
-Here, we are trying to add a float (3.1) to a vector of integers. However, we have already defined the variable to be of a specific type, therefore the language will refuse our instruction. We may want a container to be composed of numbers instead of just integers, therefore we need a way to tell the language that that is what we want. 
+Here, we are trying to add a float (3.1) to a vector of integers. However, we have already defined the variable to be of a specific type, therefore the language will refuse our instruction. We may want a container to be composed of many types of numbers instead of just integers, therefore we need a way to tell the language that that is what we want. 
 
 Remember when we mentioned how Julia defaults to the `Any` type? This is a **supertype** of every type, meaning it is the most general type from which all other types descend from, referred to as **subtypes**:
 """
@@ -271,27 +297,27 @@ Generics is a fancy term for a "parameterized type", which is to say **what type
 """
 
 # ╔═╡ 6c454cda-6711-471c-9f67-46f6046acb95
-container3::Vector{T} where T = [1,2,3] # will resolve to a vector of type Int
+container3::Vector{T} where T = [1, 2.1, "3"] 
 
 # ╔═╡ a15b5f76-0435-4ff6-b6f7-287e9ba39175
 md"""
-We declare `container3` to be a vector of type T, specifically a vector with elements of type T. We want to create a variable that is a type of vector with elements of any type of number, therefore we can restrict T to any subtypes of the supertype `Number`:
+We declare `container3` to be a vector of type `T`, specifically a vector with elements of type `T`. `T` does not mean anything special, we can name it whatever we want so long as it does not clash with any pre-defined keywords. We want to create a variable that is a type of `Vector` with elements of any type of number, therefore we can restrict T to any subtypes of the supertype `Number`:
 """
 
 # ╔═╡ 898f79af-b5bf-47b7-9528-e39dd058b021
 begin
 	container4::Vector{T} where {T <: Number} = [1, 2, 3] 
-	# will resolve to a vector of type Int
+	# Will resolve to a vector of type Int
 	
 	container5::Vector{T} where {T <: Number} = [1.1, 2.2, 3.3]
-	# will resolve to a vector of type Float64
+	# Will resolve to a vector of type Float64
 
 	container6::Vector{T} where {T <: Number} = [1, 1.1]
-	# will resolve to a vector of type Float64, which is the common type
-	# since you can represent an integer as a float (1.0), but not vice-versa
+	# Will resolve to a vector of type Float64, which is the common type
+	# Since you can represent every integer as a float (1.0), but not vice-versa
 
 	container7::Vector{T} where {T <: Number} = [1, 1.1, 1im]
-	# will resolve to a vector of type ComplexF64, meaning complex numbers
+	# Will resolve to a vector of type ComplexF64, meaning complex numbers
 	
 	# container8::Vector{T} where {T <: Number} = [1, 1.1, "1.1"]
 	# Will not work, whereas before it would resolve to a vector of type Any
@@ -299,7 +325,7 @@ end
 
 # ╔═╡ d39f9e89-7a4c-4749-b7b1-014f6d7ed241
 md"""
-To expand on the comment for `container6`, the language, in the face of elements of differing types, some languages, like Julia, will first try to promote all elements to a common type that can represent every element as accurately as possible. Floats can represent the integer 1 as 1.0, however with integers we would have to convert, say, 1.1 to 1, which means we would lose information. Only if it cannot promote all elements without losing information will Julia default to `Any`.
+To expand on the comment for `container6`, in the face of elements of differing types, some languages, like Julia, will first try to promote all elements to a common type that can represent every element as accurately as possible. We can represent the integer 1 as the float 1.0, however with integers we would have to convert, say, 1.1 to 1, which means we would lose information. Only if it cannot promote all elements without losing information will Julia default to `Any`.
 
 With generics, we can expand our `Point` struct to include multiple kinds of coordinates, not just those using whole numbers. Let us define a new struct called `Point2` that include any kind of number AND is mutable so that we can change object coordinates:
 """
@@ -347,10 +373,10 @@ In almost every programming scenario, we will need to check that specific condit
 md"""
 ### Operators
 
-Special **operators**, meaning instructions contained in characters, can be used to check for conditions. Many times, we need to check if two conditions hold or not, these are known as **comparison operators**:
+Special **operators**, meaning instructions contained in characters, can be used to check for conditions. Many times, when we need to check if two conditions hold or not, we can rely on **comparison operators**:
 
 > **Note**
-> We already saw one example of an operator previously: the `=` operator, also called the **assignment operator**!
+> We already saw two examples of an operator previously. The first was the `=` operator, also called the **assignment operator**. The second was the `<:` operator, also called the **subtype operator**.
 """
 
 # ╔═╡ 5e1dc65c-71fe-496d-9922-953c1d6741f2
@@ -370,7 +396,7 @@ begin
 	false && false # false
 
 	# || is the logical OR operator. If at least one condition
-	# holds true, then the combined condition holds true 
+	# holds true, then the combined condition also holds true 
 	true || true # true
 	true || false # true
 	false || true # true
@@ -381,13 +407,13 @@ begin
 	1 > 2 # false, since 1 is NOT larger than 2
 	1 <= 2 # true, since 1 is smaller than 2
 	2 <= 2 # true, since 2 is equal to 2
-	1 >= 2 # false, since 1 is neither larger than or equal to 2
+	1 >= 2 # false, since 1 is neither larger than nor equal to 2
 	2 >= 2 # true, since 2 is equal to 2
 end
 
 # ╔═╡ 0868f871-3646-4821-8471-058c92241191
 md"""
-There are many more operators that exist, many of which exist to simplify certain common tasks:
+There are many more operators that exist, many of which exist to simplify a number of common tasks:
 """
 
 # ╔═╡ 19a15137-839e-49db-8b1e-0f3bdb6473b9
@@ -395,13 +421,18 @@ begin
 	num = 1; println(num)
 	num += 2; println(num) # same as num = num + 10 (addition)
 	num -= 1; println(num) # same as num = num - 2 (subtraction)
-	num /= 2; println(num) # same as num = num / 9 (division)
-	num *= 10; println(num) # same as num = num * 9 (multiplication)
+	num /= 2; println(num) # same as num = num / 2 (division)
+	num *= 10; println(num) # same as num = num * 10 (multiplication)
 	num ^= 2; println(num) # same as num = num^2 (exponentiation)
+	num %= 10; println(num) # same as num = num % 10 (modulo)
 end
 
 # ╔═╡ c1ac1a00-cdb0-4b85-9b4b-3d2fa665e4b9
 md"""
+
+> **Note**
+> The `%` operator is called the **modulo operator**, and it returns the remainder of a division. If number $a$ is divisible by number $b$, then the result is 0, else it will return how far off the closest multiple of $b$ is (10 % 3 = 1 since the closest number to 10 that is a multiple of 3 is 9).
+
 ### if/else loop
 
 A **loop** represents a specific instruction to either _select_ or _repeat_ other instructions depending on one or many conditions.
@@ -410,65 +441,67 @@ By far the most common kind of loop is **if/else**, which allows for selecting w
 
 """
 
+# ╔═╡ d05b1af1-7974-4678-998e-1ea327b2fc26
+word = "meuw"
+
 # ╔═╡ 9358f4df-012e-45cf-b6b9-02dd9ee748fe
-begin
-	word = "meuw"
-	if word == "miaow"
-		println("Wrong!")
-	elseif word == "meuw"
-		println("You got it!")
-	elseif word == "maow"
-		println("Wrong!")
-	else
-		println("Wrong!")
-	end
+if word == "miaow"
+	println("Wrong!")
+elseif word == "meuw"
+	println("You got it!")
+elseif word == "maow"
+	println("Wrong!")
+else
+	println("Wrong!")
 end
 
 # ╔═╡ c809a5a9-ec5b-4f92-891d-5920fd7e5027
 md"""
 ### for loop
 
-The **for loop** allows for **iterating**, or repeating over, a number of elements. For example, if we want to print every element in a container type:
+The **for loop** allows for **iterating**, or repeating over, a number of elements. For example, if we want to print every element in a container:
 """
 
 # ╔═╡ 62a0c7f0-fdd3-4b2e-9006-0bdd7eb86ca2
-begin
-	another_container = [1,2,3]
-	for num in another_container
-		println(num)
-	end
+for num in [1,2,3]
+	println(num)
 end
 
 # ╔═╡ a739a50e-417b-475f-98ee-1092f2ee2426
 md"""
 ### while loop
 
-The `if/else` and `for` loops are the two most fundamental loops in almost every programming language. In fact, some languages, such as Go, _only_ have these two loops. Here is one more example, called the **while loop**, which is best suited for continuously iterating over code with a condition that lasts until it no holds true no longer:
+The `if/else` and `for` loops are the two most fundamental loops in almost every programming language. In fact, some languages, such as Go, _only_ have these two loops. Here is one more example, called the **while loop**, which is best suited for continuously iterating over code with a condition that lasts until it no longer holds:
 """
 
+# ╔═╡ 4627af4f-8355-417b-91aa-e935160166cb
+i = 1
+
 # ╔═╡ d997dfd1-ccb7-437d-ac46-f5ffe05e6e4c
-begin
-	i = 1
-	while i < 10
-		println(i)
-		i += 1
-	end
+while i < 10
+	println(i)
+	i += 1
 end
 
 # ╔═╡ c00fdd3b-ecc7-4182-b909-7845606184b2
 md"""
-Be **very** careful with the while loop or other loops, since if you do not eventually have the condition fail, you will have what is known as an **infinite loop** which will continue forever and eventually crash your device!
+Be **very** careful with loops, since if you do not eventually have the condition fail, you will have created what is known as an **infinite loop** which will continue forever and eventually cause a crash!
 """
 
 # ╔═╡ 921c48a1-fd9d-478e-b5fd-5361d41c7f0a
 # This is an example of an infinite loop. Since we have no way of allowing
 # the condition to fail (it is ALWAYS true), the loop will go on and on until
 # bad things happen.
-# Do not uncomment this cell!
+# Do not uncomment this cell (remove the hashtags)!
 
-#while true
+# while true
 #	println("I CAN LIVE FOREVER!")
-#end
+# end
+
+# ╔═╡ 60ac6130-f454-4f47-9ed9-cab35437de55
+md"""
+If do you end up with an infinite loop, in spite of my legal warnings (therefore, no refunds for this free workshop), on most operating systems the `CTRL + c` command is there to interrupt the program.
+"""
 
 # ╔═╡ 858aa086-21bf-4a66-94ec-b4e76834778e
 md"""
@@ -482,7 +515,7 @@ begin
 	# This function does absolutely nothing
 	function nothing_happens() end
 	
-	# This function prints "Hello World!" but does return anything
+	# This function prints "Hello World!" but does not return anything
 	function hello_world()
 		println("Hello World!")
 	end
@@ -492,7 +525,7 @@ begin
 		return num + 2
 	end
 	
-	# This function adds 3 to an argument we provide that we have declared
+	# This function adds 3 to an argument we provide that we have restricted
 	# via a type declaration to be of type Int
 	function add_3(num::Int)
 		return num + 3
@@ -514,29 +547,6 @@ md"""
 > In Julia, every line of code, or **statement**, is an **expression**, meaning that they always return _something_ even when we do not declare such. Therefore, the `hello_world()` function does return a value, but that value is of type `Nothing`, meaning there is an absence of any value being returned.
 """
 
-# ╔═╡ d8a685c6-7325-44f2-8da0-a9cdbc6cb757
-md"""
-## Recursion
-
-Recursion is recursion is recursion is... More specifically, recursion is when a function calls itself until it reaches a base case:
-"""
-
-# ╔═╡ 0dc7ae4f-4195-4e77-ab7d-d49df9e0792b
-# Fibonacci numbers are a series of numbers where each number is the sum 
-# of two preceding numbers (1, 1, 2, 3, 5, 8, 13,...). This function returns 
-# the nth Fibonacci number by calling itself until 
-function fibonacci(n::Int)::Union{Nothing, Int}
-	(n < 0) && return nothing
-	(n == 0 || n == 1) && return 1
-	return fib(n - 1) + fib(n - 2)
-end
-
-# ╔═╡ 45446224-d43e-44df-8606-e1358a049ad8
-md"""
-![Fibonacci diagram](https://understanding-recursion.readthedocs.io/en/latest/_images/fib(3).jpg)
-In the function above, `Union` is a special type that can represent multiple values at once (the return type can be either `Int` or `Nothing`).
-"""
-
 # ╔═╡ 1129fabc-6593-47f1-9c6a-a435fdc910a8
 md"""
 ## The challenge!
@@ -548,7 +558,7 @@ For the final section, we will be performing a simple exercise that can be found
 
 # ╔═╡ 73b9c0f6-456e-4929-bd78-6f982258e19c
 md"""
-### FizzBuzz! 
+### FizzBuzz 
 
 FizzBuzz is a word game that is meant to teach how division works. This is a simpler version of the game, BUT like in the original there is a little pitfall that catches many new programmers by surprise!
 
@@ -559,6 +569,8 @@ Given an integer `n`, return a specific string based on the following conditions
 - `"Buzz"` if `n` is divisible by 5
 - `""` (empty string) if none of the other conditions are true
 
+> **Hint**
+> You can use the modulo operator (`%`) to determine if a number is divisible. For example, `fizzbuzz(18)` means that the argument `n` is equal to 18, and `n % 3 == 0` returns `true` because 18 is divisible by 3 with no remainder. 
 
 > **Hint**
 > Programming languages _iterate_ over each line from top to bottom. Therefore in your `if/else` loop, watch out for which condition is checked first by the program!
@@ -568,14 +580,46 @@ Given an integer `n`, return a specific string based on the following conditions
 # ╠═╡ show_logs = false
 begin
 	function fizzbuzz(n::Int)::String
-		#Add your function body here
+		# Add your function body here
 	end
 
 	@test fizzbuzz(30) == "FizzBuzz"
 	@test fizzbuzz(25) == "Buzz"
 	@test fizzbuzz(21) == "Fizz"
 	@test fizzbuzz(19) == ""
+	# The map function applies the function fizzbuzz to a range of numbers
+	# which will act as arguments
+	@test map(fizzbuzz, 1:15) == ["", "", "Fizz", "", "Buzz", "Fizz", "", "", "Fizz", "Buzz", "", "Fizz", "", "", "FizzBuzz"]
 end
+
+# ╔═╡ b5882f37-1243-4062-82ba-54a967b6f620
+md"""
+The `@test` macro, or any Julia function with an `@` symbol in the beginning of the name, are special metaprogramming functions that do not actually run anything. They only manipulate code. 
+"""
+
+# ╔═╡ 5f117a8c-31a7-4659-b0a7-1b40bb05f095
+md"""
+Hidden in the next cell is an over the top version of the original FizzBuzz function wherein we return a collection of strings mapped to "Fizz", "Buzz", etc. We are exploiting more metaprogramming capabilities (`quote ... end` blocks) to achieve our aims by manipulating code first before running it with `eval`. We would definitely revisit in greater detail macros and other metaprogramming concepts in some future workshop, though it is a rather advanced subject that even the organizer of this workshop struggles immensely with. There is also the concept of **higher-order functions** such as the `map` function that can take another function as an argument (everything between `fizzbuzz2` and the last `end` is essentially a function):
+"""
+
+# ╔═╡ 4fe9f0ba-68f7-48af-a871-1d3617c64f46
+fizzbuzz2(n::Int)::Vector{String} =
+    map(1:n) do f
+        eval(quote
+            ($f % 15 == 0) && return "FizzBuzz"
+            ($f % 3 == 0) && return "Fizz"
+            ($f % 5 == 0) && return "Buzz"
+            return ""
+        end)
+	end
+
+# ╔═╡ 388f5f37-7e37-45fa-a961-9ffe58d864ed
+fizzbuzz2(15)
+
+# ╔═╡ baf254a6-6e38-4d26-8e47-6d187d6f0c56
+md"""
+## Thank you for joining us today!
+"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -643,6 +687,8 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─85707728-42c5-466c-8a11-5f2c8a64a5ce
 # ╠═ea1b2857-190d-4eff-9eb1-e72aa9c1b59a
 # ╟─f6dfc7bc-8c0a-4681-b733-82aa74aae52e
+# ╠═8465ef8b-8fee-42d6-9606-7dda73015708
+# ╟─10bb3dac-047d-43ab-865b-b26a9a6ea0e0
 # ╟─1d2dfcc5-a2ff-4577-9643-e96cf67813f3
 # ╠═ae27464d-53e2-4dde-a36f-9a872be109a5
 # ╟─19898457-a9ab-413c-b917-7fcb500d8a9b
@@ -666,22 +712,27 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─0868f871-3646-4821-8471-058c92241191
 # ╠═19a15137-839e-49db-8b1e-0f3bdb6473b9
 # ╟─c1ac1a00-cdb0-4b85-9b4b-3d2fa665e4b9
+# ╠═d05b1af1-7974-4678-998e-1ea327b2fc26
 # ╠═9358f4df-012e-45cf-b6b9-02dd9ee748fe
 # ╟─c809a5a9-ec5b-4f92-891d-5920fd7e5027
 # ╠═62a0c7f0-fdd3-4b2e-9006-0bdd7eb86ca2
-# ╠═a739a50e-417b-475f-98ee-1092f2ee2426
+# ╟─a739a50e-417b-475f-98ee-1092f2ee2426
+# ╠═4627af4f-8355-417b-91aa-e935160166cb
 # ╠═d997dfd1-ccb7-437d-ac46-f5ffe05e6e4c
-# ╠═c00fdd3b-ecc7-4182-b909-7845606184b2
+# ╟─c00fdd3b-ecc7-4182-b909-7845606184b2
 # ╠═921c48a1-fd9d-478e-b5fd-5361d41c7f0a
+# ╟─60ac6130-f454-4f47-9ed9-cab35437de55
 # ╟─858aa086-21bf-4a66-94ec-b4e76834778e
 # ╠═c3312918-2bb2-4b68-812e-e14dc211f7e4
 # ╟─4670652b-653c-407c-a031-dbd97c41ffc4
-# ╟─d8a685c6-7325-44f2-8da0-a9cdbc6cb757
-# ╠═0dc7ae4f-4195-4e77-ab7d-d49df9e0792b
-# ╟─45446224-d43e-44df-8606-e1358a049ad8
 # ╟─1129fabc-6593-47f1-9c6a-a435fdc910a8
 # ╟─73b9c0f6-456e-4929-bd78-6f982258e19c
 # ╟─8cd75e7b-3111-4d5a-ae02-18f913cd242e
 # ╠═83642231-26c5-403d-8eb6-4d4ed65f1040
+# ╟─b5882f37-1243-4062-82ba-54a967b6f620
+# ╟─5f117a8c-31a7-4659-b0a7-1b40bb05f095
+# ╟─4fe9f0ba-68f7-48af-a871-1d3617c64f46
+# ╠═388f5f37-7e37-45fa-a961-9ffe58d864ed
+# ╟─baf254a6-6e38-4d26-8e47-6d187d6f0c56
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
