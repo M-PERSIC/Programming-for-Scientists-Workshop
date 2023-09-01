@@ -641,7 +641,7 @@ md"""
 
 This is an optional challenge you may try at home or if we have some time left during the workshop.
 
-Given a string `word` and a character `chr`, return the amount of times the character appears in the string.
+Given a string `word` and a character `chr`, return the amount of times the character appears in the string. For the sake of simplicity, assume that every given string is in lowercase.
 
 > **Hint**
 > You can check if a character is within a string using the `in` function (`if 'c' in word`)
@@ -651,16 +651,10 @@ Given a string `word` and a character `chr`, return the amount of times the char
 """
 
 # ╔═╡ 3b87e3bd-b7cb-4e85-af25-f53c71779722
+# ╠═╡ show_logs = false
 begin
 	function character_count(word::String, chr::Char)::Int
 		# add your function body here
-		count = 0
-		for i in word
-			if i == chr
-				count += 1
-			end
-		end
-		return count
 	end
 
 	@test character_count("banana", 'a') == 3
