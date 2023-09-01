@@ -67,7 +67,7 @@ Along the way, new types of programming languages came about such as **markup la
 md"""
 ## How does this work?
 
-We are in what is known as a **notebook**! Specifically, it is a **WYSIWYG** (What You See Is What You Get) environment for working with code within individual blocks known as _cells_. You can add, remove, or manipulate any cell, which will help you learn with a more hands-on approach. Run the cell either via clicking the "Run cell" button at the bottom right of each cell or via the `SHIFT + ENTER` command. You can even download this notebook and share it with your friends via the export button at the top right!
+We are in what is known as a **notebook**! Specifically, it is a **WYSIWYG** (What You See Is What You Get) environment for working with code within individual blocks known as _cells_. You can add, remove, or manipulate any cell, which will help you learn with a more hands-on approach. Run the cell either via clicking the "Run cell" button at the bottom right of each cell or via the `SHIFT + ENTER` command.
 
 This specific environment is called a [Pluto](https://plutojl.org/) notebook, which is designed for Julia. Julia is a relatively new programming language with excellent features for scientific computing. It is also great for teaching due to it being high-level and easy to read and write.
 
@@ -616,6 +616,58 @@ fizzbuzz2(n::Int)::Vector{String} =
 # ╔═╡ 388f5f37-7e37-45fa-a961-9ffe58d864ed
 fizzbuzz2(15)
 
+# ╔═╡ c055d043-589f-4776-9a04-ee090a7c2daf
+md"""
+Here is one more version that utilizes Julia's built-in broadcasting feature, which is basically a way to use the map function with a dot. You can learn more about it [here](https://docs.julialang.org/en/v1/manual/functions/#Function-composition-and-piping).
+"""
+
+# ╔═╡ 497b430f-b70d-42fa-968a-3ab5bb1165ff
+function fizzbuzz3(n::Int)::Vector{String} 
+	series = 1:n
+	series_str = string.(series)
+	series_str[rem.(series, 3) .== 0] .= "Fizz"
+	series_str[rem.(series, 5) .== 0] .= "Buzz"
+	series_str[rem.(series, 15) .== 0] .= "FizzBuzz"
+	series_str[all.(isdigit, series_str) .== true] .= ""
+	return series_str
+end
+
+# ╔═╡ ca633c55-ce47-49e7-acfa-d53535856b0e
+fizzbuzz3(15)
+
+# ╔═╡ 5f359cd6-5ff6-4dae-88ad-8f1523d48b12
+md"""
+### Optional challenge: character count
+
+This is an optional challenge you may try at home or if we have some time left during the workshop.
+
+Given a string `word` and a character `chr`, return the amount of times the character appears in the string.
+
+> **Hint**
+> You can check if a character is within a string using the `in` function (`if 'c' in word`)
+
+> **Hint**
+> You can iterate over each character in a string with a for loop (`for i in word`)
+"""
+
+# ╔═╡ 3b87e3bd-b7cb-4e85-af25-f53c71779722
+begin
+	function character_count(word::String, chr::Char)::Int
+		# add your function body here
+		count = 0
+		for i in word
+			if i == chr
+				count += 1
+			end
+		end
+		return count
+	end
+
+	@test character_count("banana", 'a') == 3
+	@test character_count("workshop", 's') == 1
+	@test character_count("pneumonoultramicroscopicsilicovolcanoconiosis", 'o') == 9
+end
+
 # ╔═╡ baf254a6-6e38-4d26-8e47-6d187d6f0c56
 md"""
 ## Thank you for joining us today!
@@ -733,6 +785,11 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─5f117a8c-31a7-4659-b0a7-1b40bb05f095
 # ╟─4fe9f0ba-68f7-48af-a871-1d3617c64f46
 # ╠═388f5f37-7e37-45fa-a961-9ffe58d864ed
+# ╟─c055d043-589f-4776-9a04-ee090a7c2daf
+# ╟─497b430f-b70d-42fa-968a-3ab5bb1165ff
+# ╠═ca633c55-ce47-49e7-acfa-d53535856b0e
+# ╟─5f359cd6-5ff6-4dae-88ad-8f1523d48b12
+# ╠═3b87e3bd-b7cb-4e85-af25-f53c71779722
 # ╟─baf254a6-6e38-4d26-8e47-6d187d6f0c56
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
