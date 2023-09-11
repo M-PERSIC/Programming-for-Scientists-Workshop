@@ -94,7 +94,7 @@ We need to explain a few concepts:
 
 # ╔═╡ b7b8c1ea-4c0a-4b0d-937a-d46a20b96ea9
 md"""
-Now, for you to declare yourself a true programmer, you must make your first program! This is a rite of passage for any new "coder", a tradition that has spanned the decades! You will write a one-line program that outputs (prints) the sentence "Hello World!". **Write out the following line in an empty cell and run it:** `println("Hello World")`
+Now, for you to declare yourself a true programmer, you must make your first program! This is a rite of passage for any new "coder", a tradition that has spanned the decades! You will write a one-line program that outputs (prints) the sentence "Hello World!". **Write out the following line in an empty cell and run it:** `println("Hello World")`:
 """
 
 # ╔═╡ 43ee935e-ec0d-4277-84f5-9c9926aacb31
@@ -104,7 +104,7 @@ Now, for you to declare yourself a true programmer, you must make your first pro
 md"""
 ## Variables
 
-A **variable** is a name that is tied to a value stored in memory. Instead of having to remember exactly where this data is located every time, we can reuse the name anywhere in our program.
+A **variable** is a name that is tied to a value stored in memory. Instead of having to remember exactly where this data is located every time, we can reuse the name anywhere in our program:
 """
 
 # ╔═╡ b18387c5-f0aa-4a67-9826-665bcacec2ff
@@ -127,7 +127,18 @@ These variables are **mutable** by default, meaning we can update the values. To
 
 # ╔═╡ 62a2d5be-261e-413f-9879-9ecb6214ac50
 const y = 2
-# y = 3 or any other value will return an error!
+# y = 3 or any other value should not be possible!
+
+# ╔═╡ 25f70863-3a3a-404c-8640-ae532c80cc8e
+md"""
+> **NOTE**
+> If you run the above example, you might be surprised to find that, in spite of what
+> I just told you, it is possible to update the value of a constant variable! Julia
+> allows this in a notebook to make it easier to change things around, however `const`
+> will work as expected when Julia code is run in a **script** (file that includes 
+> code)
+	
+"""
 
 # ╔═╡ 71fef82f-5494-480c-a825-76771b7383f8
 md"""
@@ -153,8 +164,8 @@ Floats are related to, but not exactly the same as decimal numbers we usually se
 md"""
 Some languages include more specific number types. With Julia, there are at least 11 integer types. These include the signed integers `Int8`, `Int16`, `Int32`, `Int64`, `Int128`, and `BigInt`, and the unsigned integers `UInt8` up to `UInt128`. Notice how there are two integer classes:
 
-- **Unsigned** integers use every bit to represent the number (7 is represented as 0111 = $(0 \times 8) + (1 \times 4) + (1 \times 2) + (1 \times 1) = 4 + 2 + 1$)
-- **Signed** integers use one bit to represent a positive or negative number (0111 represents -7, 1111 represents 7)
+- **Unsigned** integers use every bit to represent the number (7 is represented with an 8-bit unsigned integer (`UInt8`) as 00000111 = $(0 \times 128) + (0 \times 64) + (0 \times 32) + (0 \times 16) + (0 \times 8) + (1 \times 4) + (1 \times 2) + (1 \times 1)$
+- **Signed** integers use one bit to represent a positive or negative number (00000111 represents -7, 10000111 represents 7)
 
 `BigInt` is a special type that can represent almost any large number, at the cost of performance. We usually stick to `Int64` since it represents most numbers for our needs (any number within -$2^{63}$ and $2^{63}$).
 
@@ -175,7 +186,7 @@ end
 
 # ╔═╡ 977bf229-f824-4362-a86f-b705d872a91d
 md"""
-Each character symbol in a language is represented by a specific number. There are defined standards, such as Unicode, that formalize this relationship between languages. Julia, by default, encodes characters according to UTF-8, meaning as a sequence of 8 bytes, or 64 bits.
+Each character symbol in a language is represented by a specific number. There are defined standards, such as Unicode, that formalize this relationship between languages. Julia, by default, encodes characters according to UTF-8, which uses a minimum of 8 bits to represent each character.
 
 We will see one more type of primitive (booleans) further below.
 """
@@ -418,13 +429,13 @@ There are many more operators that exist, many of which exist to simplify a numb
 
 # ╔═╡ 19a15137-839e-49db-8b1e-0f3bdb6473b9
 begin
-	num = 1; println(num)
-	num += 2; println(num) # same as num = num + 10 (addition)
-	num -= 1; println(num) # same as num = num - 2 (subtraction)
-	num /= 2; println(num) # same as num = num / 2 (division)
-	num *= 10; println(num) # same as num = num * 10 (multiplication)
-	num ^= 2; println(num) # same as num = num^2 (exponentiation)
-	num %= 10; println(num) # same as num = num % 10 (modulo)
+	result = 1; println(result)
+	result += 2; println(result) # same as num = num + 10 (addition)
+	result -= 1; println(result) # same as num = num - 2 (subtraction)
+	result /= 2; println(result) # same as num = num / 2 (division)
+	result *= 10; println(result) # same as num = num * 10 (multiplication)
+	result ^= 2; println(result) # same as num = num^2 (exponentiation)
+	result %= 10; println(result) # same as num = num % 10 (modulo)
 end
 
 # ╔═╡ c1ac1a00-cdb0-4b85-9b4b-3d2fa665e4b9
@@ -433,31 +444,30 @@ md"""
 > **Note**
 > The `%` operator is called the **modulo operator**, and it returns the remainder of a division. If number $a$ is divisible by number $b$, then the result is 0, else it will return how far off the closest multiple of $b$ is (10 % 3 = 1 since the closest number to 10 that is a multiple of 3 is 9).
 
-### if/else loop
+### if/else statement
 
-A **loop** represents a specific instruction to either _select_ or _repeat_ other instructions depending on one or many conditions.
-
-By far the most common kind of loop is **if/else**, which allows for selecting which code to execute depending on a set of conditions:
-
+If/else is what is known as a **conditional statement**, meaning a way to control decision-making in code. We can choose to execute specific code depending on which conditions hold true:
 """
 
 # ╔═╡ d05b1af1-7974-4678-998e-1ea327b2fc26
-word = "meuw"
+choice = 5
 
 # ╔═╡ 9358f4df-012e-45cf-b6b9-02dd9ee748fe
-if word == "miaow"
-	println("Wrong!")
-elseif word == "meuw"
-	println("You got it!")
-elseif word == "maow"
-	println("Wrong!")
+if choice == 1
+	println("No")
+elseif choice == 3
+	println("Almost there")
+elseif choice == 5
+	println("You got it")
 else
-	println("Wrong!")
+	println("Too bad")
 end
 
 # ╔═╡ c809a5a9-ec5b-4f92-891d-5920fd7e5027
 md"""
 ### for loop
+
+A **loop** represents a specific instruction to either _select_ or _repeat_ other instructions depending on one or many conditions.
 
 The **for loop** allows for **iterating**, or repeating over, a number of elements. For example, if we want to print every element in a container:
 """
@@ -471,7 +481,7 @@ end
 md"""
 ### while loop
 
-The `if/else` and `for` loops are the two most fundamental loops in almost every programming language. In fact, some languages, such as Go, _only_ have these two loops. Here is one more example, called the **while loop**, which is best suited for continuously iterating over code with a condition that lasts until it no longer holds:
+The `if/else` statement and `for` loop are the two most fundamental ways to control code in almost every programming language. Here is one more example, called the **while loop**, which is best suited for continuously iterating over code with a condition that lasts until it no longer holds:
 """
 
 # ╔═╡ 4627af4f-8355-417b-91aa-e935160166cb
@@ -518,6 +528,11 @@ begin
 	# This function prints "Hello World!" but does not return anything
 	function hello_world()
 		println("Hello World!")
+	end
+
+	# This function returns the string "Hello World!" instead of outputting it
+	function hello_world()
+		return "Hello World!"
 	end
 	
 	# This function adds 2 to an argument we provide
@@ -573,7 +588,7 @@ Given an integer `n`, return a specific string based on the following conditions
 > You can use the modulo operator (`%`) to determine if a number is divisible. For example, `fizzbuzz(18)` means that the argument `n` is equal to 18, and `n % 3 == 0` returns `true` because 18 is divisible by 3 with no remainder. 
 
 > **Hint**
-> Programming languages _iterate_ over each line from top to bottom. Therefore in your `if/else` loop, watch out for which condition is checked first by the program!
+> Programming languages _iterate_ over each line from top to bottom. Therefore in your `if/else` statement, watch out for which condition is checked first by the program!
 """
 
 # ╔═╡ 83642231-26c5-403d-8eb6-4d4ed65f1040
@@ -624,12 +639,11 @@ Here is one more version that utilizes Julia's built-in broadcasting feature, wh
 # ╔═╡ 497b430f-b70d-42fa-968a-3ab5bb1165ff
 function fizzbuzz3(n::Int)::Vector{String} 
 	series = 1:n
-	series_str = string.(series)
-	series_str[rem.(series, 3) .== 0] .= "Fizz"
-	series_str[rem.(series, 5) .== 0] .= "Buzz"
-	series_str[rem.(series, 15) .== 0] .= "FizzBuzz"
-	series_str[all.(isdigit, series_str) .== true] .= ""
-	return series_str
+	result = repeat([""], length(series))
+	result[rem.(series, 3) .== 0] .= "Fizz"
+	result[rem.(series, 5) .== 0] .= "Buzz"
+	result[rem.(series, 15) .== 0] .= "FizzBuzz"
+	return result
 end
 
 # ╔═╡ ca633c55-ce47-49e7-acfa-d53535856b0e
@@ -725,6 +739,7 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─529eda59-76ee-4446-853f-be2774e08992
 # ╟─4624fe4b-4f0d-48f4-9bee-44546e2e4144
 # ╠═62a2d5be-261e-413f-9879-9ecb6214ac50
+# ╟─25f70863-3a3a-404c-8640-ae532c80cc8e
 # ╟─71fef82f-5494-480c-a825-76771b7383f8
 # ╠═797670e0-443e-4cb3-bdb3-ca8fc1b9c288
 # ╟─f7ce7abd-cbe9-45be-b36d-d80f4fe3171c
