@@ -1,0 +1,18 @@
+{
+    "features": {
+        "ghcr.io/julialang/devcontainer-features/julia:1": {
+            "channel": "1.9"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "julialang.language-julia",
+                "tamasfe.even-better-toml",
+                "eamodio.gitlens",
+                "yzhang.markdown-all-in-one",
+             	"bierner.markdown-preview-github-styles"   
+            ]
+        }
+    },
+}
