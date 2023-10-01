@@ -579,7 +579,7 @@ FizzBuzz is a word game that is meant to teach how division works. This is a sim
 
 Given an integer `n`, return a specific string based on the following conditions:
 
-- `"Fizzbuzz"` if `n` is divisible by 15 (meaning both 3 AND 5)
+- `"FizzBuzz"` if `n` is divisible by 15 (meaning both 3 AND 5)
 - `"Fizz"` if `n` is divisible by 3
 - `"Buzz"` if `n` is divisible by 5
 - `""` (empty string) if none of the other conditions are true
