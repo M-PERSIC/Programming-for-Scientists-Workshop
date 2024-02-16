@@ -120,11 +120,6 @@ There are two steps happening here:
 A third step, called **assignment**, is when the value of a variable is changed:
 """
 
-# ╔═╡ 4624fe4b-4f0d-48f4-9bee-44546e2e4144
-md"""
-These variables are **mutable** by default, meaning we can update the values. To make sure we cannot change the value tied to the variable, we can declare the variable to be **constant**:
-"""
-
 # ╔═╡ 71fef82f-5494-480c-a825-76771b7383f8
 md"""
 ## Types
