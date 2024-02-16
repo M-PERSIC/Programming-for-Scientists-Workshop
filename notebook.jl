@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.27
+# v0.19.38
 
 #> [frontmatter]
 #> author_url = "https://github.com/M-PERSIC"
@@ -24,14 +24,14 @@ Presented by **Michael Persico** of the **Biology Student Association (Concordia
 **Source**: [github.com/M-PERSIC/Programming-for-Scientists-Workshop.git](https://github.com/M-PERSIC/Programming-for-Scientists-Workshop.git)
 
 > **Note**
-> This workshop is the second part of the "Computers/Programming for Scientists" double workshop. The first part, "Computers for Scientists", was presented separately and thus some concepts are not repeated in order to conserve time. The presentation slides can be found in the source link above.
+> This workshop is the second part of the "Computers/Programming for Scientists" double workshop. The first part, "Computers for Scientists", was presented separately and thus some concepts are not repeated in order to conserve time.
 """
 
 # ╔═╡ 7e63c1e0-7627-4d26-bc01-21332de6be16
 md"""
 ## What is a programming language?
 
-According to the Encyclopædia Brittanica, a **programming language** is "any of various languages for expressing a set of detailed instructions for a digital computer". In simpler terms, it is a system of commands that tells your computer exactly what to do.
+According to the Encyclopædia Brittanica, a **programming language** is "any of various languages for expressing a set of detailed instructions for a digital computer." In simpler terms, it is a system of commands that tells your computer exactly what to do.
 
 No two languages are alike, and there are an almost incalculable number of differences between each of them, but do not get overwhelmed! Programming, and computer science in general, are massive fields that people have dedicated entire careers to (ha, nerds)! Presented during this workshop is a series of bite-sized overviews of key programming concepts.
 """
@@ -41,26 +41,26 @@ md"""
 ## A little history
 ![The lovely Ada Loveace](https://cdn.britannica.com/31/187431-131-93322729/Ada-Lovelace.jpg)
 
-Ada Lovelace was the first computer programmer. In the 1830s, mathematician Charles Babbage wished to build the "Analytical Engine" which was to be an early programmable computer. The engine was to include a primitive language, and it was Lovelace who proposed the first theoretical programs that could perform different tasks like calculating Bernoulli numbers.
+Ada Lovelace is considered to be the first computer programmer. In the 1830s, mathematician Charles Babbage wished to build the "Analytical Engine" which was to be an early programmable computer. The engine was to include a primitive language, and it was Lovelace who proposed the first theoretical programs that could perform different tasks like calculating Bernoulli numbers.
 
 > **Note**
-> She is the namesake of the modern Ada programming language still in use today!
+> She is the namesake of the modern Ada programming language that is still in use today!
 
 Between then and the first modern computers, almost all programs were written in **machine language**, which means the language the computer itself speaks. This is usually in binary (0s and 1s), therefore programmers would have to write the thousands of lines of nothing but numbers all the while using fragile systems like punch cards! This period is categorized as the **first generation** of programming languages.
 
 ![The dreaded punch card](https://media.wired.com/photos/59325cb4a3126458449944af/191:100/w_1280,c_limit/punch-cards-ft.jpg)
 
-To help _humanize_ these languages, **assembly languages** were created, which are still machine language however now words could be used in lieu of numbers, thus greatly increasing readability. Their rise constituted the **second generation**.
+**Assembly languages** were soon invented, which are still machine language however now words could be used in lieu of numbers, thus greatly increasing readability. Their rise constituted the **second generation**.
 
-New **high-level** languages soon came into the forway, which are much more _abstract_ than low-level languages and can almost read like a real human language. They also include novel features that are not possible with low-level languages like automatic memory management and portability across many different computer types. This **third generation** saw the rise of many popular languages such as C, Java, Python and JavaScript. The **fourth and fifth generations** included more specialized and featureful languages like LISP and R.
+New **high-level** languages soon came into the forway which were much more _abstract_ than low-level languages, meaning they almost read like a real human language. They also include novel features that are not possible with low-level languages like automatic memory management and portability across many different computer types. This **third generation** saw the rise of many popular languages such as C, Java, Python and JavaScript. The **fourth and fifth generations** included more specialized and featureful languages like LISP and R.
 
 Along the way, new types of programming languages came about such as **markup languages** (Markdown, HTML), which use tags to add structure and meaning to documents. Today, many languages enjoy popularity in a number of specific domains: 
 
-- **Systems languages**: (Rust, Go, Zig, C)
-- **Web development**: (Javascript/Typescript, PHP)
-- **General-purpose**: (Julia, Python, Java, Ruby)
-- **Scientific**: (Fortran, R)
-- **Scripting**: (Bash, PowerShell, Perl)
+- **Systems languages**: Rust, Go, Zig, C,...
+- **Web development**: Javascript/Typescript, PHP,...
+- **General-purpose**: Julia, Python, Java, Ruby,...
+- **Scientific**: Fortran, R,...
+- **Scripting**: Bash, PowerShell, Perl,...
 """
 
 # ╔═╡ f603f377-8697-4d09-8610-c9369501a857
@@ -94,7 +94,7 @@ We need to explain a few concepts:
 
 # ╔═╡ b7b8c1ea-4c0a-4b0d-937a-d46a20b96ea9
 md"""
-Now, for you to declare yourself a true programmer, you must make your first program! This is a rite of passage for any new "coder", a tradition that has spanned the decades! You will write a one-line program that outputs (prints) the sentence "Hello World!". **Write out the following line in an empty cell and run it:** `println("Hello World")`:
+Now, for you to declare yourself a true programmer, you must make your first program! This is a rite of passage for any new "coder", a tradition that has spanned the decades! You will write a one-line program that outputs (prints) the sentence "Hello World!". **Write out the following line in an empty cell and run it:** `println("Hello World")`
 """
 
 # ╔═╡ 43ee935e-ec0d-4277-84f5-9c9926aacb31
@@ -125,30 +125,15 @@ md"""
 These variables are **mutable** by default, meaning we can update the values. To make sure we cannot change the value tied to the variable, we can declare the variable to be **constant**:
 """
 
-# ╔═╡ 62a2d5be-261e-413f-9879-9ecb6214ac50
-const y = 2
-# y = 3 or any other value should not be possible!
-
-# ╔═╡ 25f70863-3a3a-404c-8640-ae532c80cc8e
-md"""
-> **NOTE**
-> If you run the above example, you might be surprised to find that, in spite of what
-> I just told you, it is possible to update the value of a constant variable! Julia
-> allows this in a notebook to make it easier to change things around, however `const`
-> will work as expected when Julia code is run in a **script** (file that includes 
-> code)
-	
-"""
-
 # ╔═╡ 71fef82f-5494-480c-a825-76771b7383f8
 md"""
 ## Types
 
-**Types** represent the different kinds of data that can exist. Text and numbers can be considered to be data with different properties, for example. Let us explore some of the fundamental types that almost every language possess!
+**Types** represent the different kinds of data that can exist, such as text and numbers. Let us explore some of the fundamental types that almost every language possess!
 
 ### primitive types
 
-**Primitive types**, or simply known as **primitives**, are the most basic types found in almost every language that represent important concepts like numbers, text, and arrays (containers). 
+**Primitive types**, or simply known as **primitives**, are basic types that represent important concepts like numbers, text, and arrays (containers). 
 
 Numbers are usually represented as two types: integers and floats. An **integer** is a whole number (1, 10, 1238915,...) with no decimal points. A **float**, or **floating-point number**, is a number with a decimal point (1.1, 3.14,...). 
 
@@ -162,31 +147,29 @@ Floats are related to, but not exactly the same as decimal numbers we usually se
 
 # ╔═╡ f7ce7abd-cbe9-45be-b36d-d80f4fe3171c
 md"""
-Some languages include more specific number types. With Julia, there are at least 11 integer types. These include the signed integers `Int8`, `Int16`, `Int32`, `Int64`, `Int128`, and `BigInt`, and the unsigned integers `UInt8` up to `UInt128`. Notice how there are two integer classes:
+Some languages include more specific number types. With Julia, for instance, there are two integer classes:
 
 - **Unsigned** integers use every bit to represent the number (7 is represented with an 8-bit unsigned integer (`UInt8`) as 00000111 = $(0 \times 128) + (0 \times 64) + (0 \times 32) + (0 \times 16) + (0 \times 8) + (1 \times 4) + (1 \times 2) + (1 \times 1)$
 - **Signed** integers use one bit to represent a positive or negative number (00000111 represents -7, 10000111 represents 7)
 
-`BigInt` is a special type that can represent almost any large number, at the cost of performance. We usually stick to `Int64` since it represents most numbers for our needs (any number within -$2^{63}$ and $2^{63}$).
-
 > **NOTE**  
 > In Julia, `Int` is an **alias type** (alternative name) for `Int64`
 
-**Strings** are sequences made up of **characters**, the letters of the alphabet or other symbols we use in writing. Strings are encoded via two double quotation marks whilst characters are encoded with single quotation marks:
+**Strings**, which represent text, are sequences made up of **characters**, the letters of the alphabet or other symbols we use in writing. Strings are identified via two double quotation marks ("") whilst characters are identified via single quotation marks (''):
 """
 
 # ╔═╡ a00fe1dc-8a89-4d0d-8247-62106780a7ca
 begin
 	str = "wow"
 	# A character in Julia is represented as a Char type. Therefore, a String is 
-	# a container type (see below) made up of Char values!
+	# a container type (more on this in a bit) made up of Chars!
 	character = 'w'
 	str2 = string(['w', 'o', 'w']) 
 end
 
 # ╔═╡ 977bf229-f824-4362-a86f-b705d872a91d
 md"""
-Each character symbol in a language is represented by a specific number. There are defined standards, such as Unicode, that formalize this relationship between languages. Julia, by default, encodes characters according to UTF-8, which uses a minimum of 8 bits to represent each character.
+Each character is represented by a specific number ('a' is 97, 'b' is 98,...). There are defined standards, such as Unicode, that formalize this relationship between languages. Julia, by default, encodes characters according to UTF-8, which uses a minimum of 8 bits to represent each character ('a' is 01100001,...).
 
 We will see one more type of primitive (booleans) further below.
 """
@@ -207,7 +190,7 @@ end
 
 # ╔═╡ f6dfc7bc-8c0a-4681-b733-82aa74aae52e
 md"""
-The most common container type in Julia is a `Vector`, which is an example of a 1-dimensional `Array` with variable length (**arrays** are containers with a fixed amount of values). There are also matrices, dataframes, and many others.
+The most common container type in Julia is a `Vector`, which is an example of an `Array` that can contain any number of values inside it (**arrays** are containers with a fixed amount of values). There are also matrices, dataframes, and many others.
 
 The elements within a container type are usually accessible based on their **index**, or position within the container:
 """
@@ -231,14 +214,14 @@ end
 
 # ╔═╡ 10bb3dac-047d-43ab-865b-b26a9a6ea0e0
 md"""
-One of the biggest language wars that continues to be fought to this day is between **0-based indexing** and **1-based indexing**, meaning does the first element of a collection start at position 0 or 1. The exact reasons for the former involve performance constraints in the early days of computers along with how each element within a container is internally represented by a 1-bit shift in the memory address from the previous element (some spooky stuff).
+One of the biggest language wars that continues to be fought to this day is between **0-based indexing** and **1-based indexing**, meaning does the first element of a collection start at position 0 or 1. The exact reasons for the former involve performance constraints in the early days of computers along with how each element within a container is internally represented by a 1-bit shift in the memory address from the previous element (TL;DR: some spooky stuff).
 """
 
 # ╔═╡ 1d2dfcc5-a2ff-4577-9643-e96cf67813f3
 md"""
-### composite (product) types
+### composite types
 
-**Composite types**, also referred to as **structs** in some languages, are data types we can create that combine other data types into one. For example, let's define a `Point` type which represents any point on a 2D plane (x and y coordinates): 
+**Composite types**, also referred to as **structs** in some languages, are types we can create that combine other types into one. For example, let's define a `Point` type which represents any point on a 2D plane (x and y coordinates): 
 """
 
 # ╔═╡ ae27464d-53e2-4dde-a36f-9a872be109a5
@@ -249,7 +232,7 @@ end
 
 # ╔═╡ 19898457-a9ab-413c-b917-7fcb500d8a9b
 md"""
-`Point` is composed of two integer types with attached names `x` and `y`. These are properties of `Point` known as **fields**.
+`Point` is composed of two numbers (specifically, integers) named `x` and `y`. These are properties of `Point` known as **fields**.
 
 Notice that we added `::Int` to each field. These are known as **type declarations**, meaning we are instructing the language as to the _exact_ type each field will be. If we did not do this, `x` and `y` would default to the `Any` type, which would mean any kind of data would be allowed (string, array, etc.). This, of course, would not make sense for representing coordinates!
 """
@@ -263,97 +246,84 @@ end
 # ╔═╡ c120e2bb-91f3-402c-ba79-5e3e794c48e5
 md"""
 Each instance of Point, such as `p1`, is known as an **object**, and we call the way in which we can access the fields of `p1` **dot notation**.
-
-Now let us see what happens if we try to update the values of `p1`:
-"""
-
-# ╔═╡ 9627e9c7-d663-45ce-86db-ed5407b4ce3b
-# Try to change the x coordinate to 2
-p1.x = 2
-
-# ╔═╡ 0e1a55a1-e787-4b9d-b490-a6eb7af7af86
-md"""
-Look at the `sefield!` error. Some languages, like Julia, force structs to be **immutable** by default, meaning we are not allowed to change the field values. We would have to create new `Point` objects if we need updated coordinates. We can create mutable structs with the `mutable` keyword, but before we do... 
 """
 
 # ╔═╡ 6a95b42a-28ab-4368-a13a-954d2c6c2aca
 md"""
-## Generics
+### generic types
 
 There are many situations that can arise wherein we may not necessarily know what type the value will be, or that we need more flexibility than what is on offer. Let us witness such a scenario:
 """
 
 # ╔═╡ c5994f47-fcb9-4a8c-a975-e668a605a489
-container::Vector{Int} = [1, 2, 3.1]
+collection3::Vector{Int} = [1, 2, 3.1]
 
 # ╔═╡ 4ff97b5e-38d3-466a-8b25-1058c0650841
 md"""
-Here, we are trying to add a float (3.1) to a vector of integers. However, we have already defined the variable to be of a specific type, therefore the language will refuse our instruction. We may want a container to be composed of many types of numbers instead of just integers, therefore we need a way to tell the language that that is what we want. 
+Here, we are trying to add a float (3.1) to a vector of integers. However, we have already defined the variable to be of a specific type (a vector of integers), therefore the language will refuse our instruction. We may want a collection to be composed of many types of numbers instead of just integers, therefore we need a way to tell the language that that is what we want. 
 
-Remember when we mentioned how Julia defaults to the `Any` type? This is a **supertype** of every type, meaning it is the most general type from which all other types descend from, referred to as **subtypes**:
+Remember when we mentioned how Julia defaults to the `Any` type? This is a **supertype** of every type, meaning it is the most general, catch-all type from which all other types descend from, referred to as **subtypes**:
 """
 
 # ╔═╡ 0989d007-7085-434d-9dfb-f84115635c38
 begin
-	container2::Vector{Any} = [1,2,3]
-	push!(container2, 4.1)
-	println(container2)
+	collection4::Vector{Any} = [1,2,3]
+	push!(collection4, 4.1)
+	println(collection4)
 end
 
 # ╔═╡ 47fa73d0-5116-4cc1-9a7f-03c12a733c4f
 md"""
 The further away from the supertype, the more specific the type is. While we could simply declare everything as `Any`, this will cause problems for us further down the road. What if we want to have _some_ degree of control over what types can be allowed? Basically, what if we can restrict the type, such as declaring "the type can be any type of number"? 
 
-Generics is a fancy term for a "parameterized type", which is to say **what type(s) a type can be.** Another way to create a container of type `Any` is:
+Generic types is a fancy term for a "parameterized types", which is to say **what type(s) a type can be.** Another way to create a collection of type `Any` is:
 """
 
 # ╔═╡ 6c454cda-6711-471c-9f67-46f6046acb95
-container3::Vector{T} where T = [1, 2.1, "3"] 
+collection5::Vector{T} where T = [1, 2.1, "3"] 
 
 # ╔═╡ a15b5f76-0435-4ff6-b6f7-287e9ba39175
 md"""
-We declare `container3` to be a vector of type `T`, specifically a vector with elements of type `T`. `T` does not mean anything special, we can name it whatever we want so long as it does not clash with any pre-defined keywords. We want to create a variable that is a type of `Vector` with elements of any type of number, therefore we can restrict T to any subtypes of the supertype `Number`:
+We declare `collection5` to be a vector of type `T`, specifically a vector with elements of type `T`. `T` does not mean anything special, we can name it whatever we want so long as it does not clash with any pre-defined keywords. We want to create a variable that is a type of `Vector` with elements of any type of number, therefore we can restrict T to any subtypes of the supertype `Number`:
 """
 
 # ╔═╡ 898f79af-b5bf-47b7-9528-e39dd058b021
 begin
-	container4::Vector{T} where {T <: Number} = [1, 2, 3] 
-	# Will resolve to a vector of type Int
+	collection6::Vector{T} where {T <: Number} = [1, 2, 3] 
+	# Will resolve to a vector of integers
 	
-	container5::Vector{T} where {T <: Number} = [1.1, 2.2, 3.3]
-	# Will resolve to a vector of type Float64
+	collection7::Vector{T} where {T <: Number} = [1.1, 2.2, 3.3]
+	# Will resolve to a vector of floats
 
-	container6::Vector{T} where {T <: Number} = [1, 1.1]
-	# Will resolve to a vector of type Float64, which is the common type
-	# Since you can represent every integer as a float (1.0), but not vice-versa
+	collection8::Vector{T} where {T <: Number} = [1, 1.1]
+	# Will resolve to a vector of floats because you can represent every integer as a float (1 becomes 1.0, 2 becomes 2.0,...), but not vice-versa
 
-	container7::Vector{T} where {T <: Number} = [1, 1.1, 1im]
-	# Will resolve to a vector of type ComplexF64, meaning complex numbers
+	collection9::Vector{T} where {T <: Number} = [1, 1.1, 1im]
+	# Will resolve to a vector of complex numbers
 	
-	# container8::Vector{T} where {T <: Number} = [1, 1.1, "1.1"]
-	# Will not work, whereas before it would resolve to a vector of type Any
+	# collection10::Vector{T} where {T <: Number} = [1, 1.1, "1.1"]
+	# Will not work because it will resolve to a vector of type Any (due to the string) whereas we declared that only numbers can exist in our collection
 end
 
 # ╔═╡ d39f9e89-7a4c-4749-b7b1-014f6d7ed241
 md"""
-To expand on the comment for `container6`, in the face of elements of differing types, some languages, like Julia, will first try to promote all elements to a common type that can represent every element as accurately as possible. We can represent the integer 1 as the float 1.0, however with integers we would have to convert, say, 1.1 to 1, which means we would lose information. Only if it cannot promote all elements without losing information will Julia default to `Any`.
+As you saw, in the face of elements of differing types, some languages, like Julia, will first try to promote all elements to a common type that can represent every element as accurately as possible. We can represent the integer 1 as the float 1.0, however with integers we would have to convert, say, 1.1 to 1, which means we would lose information. Only if it cannot promote all elements without losing information will Julia default to `Any`.
 
-With generics, we can expand our `Point` struct to include multiple kinds of coordinates, not just those using whole numbers. Let us define a new struct called `Point2` that include any kind of number AND is mutable so that we can change object coordinates:
+With generic types, we can expand our `Point` struct to include multiple kinds of coordinates, not just those using whole numbers. Let us define a new struct called `Point2` that include any type of number:
 """
 
 # ╔═╡ 87215b16-287c-4c3b-bf66-d14c8a90b1d9
 begin
-	mutable struct Point2{T <: Number}
+	struct Point2{T <: Number}
 		x::T
 		y::T
 	end
 	
 	p2 = Point2(3.1, 4.2)
-	p2.x = 10.8
 
 	println(p2)
 
-	# We can get a little bit crazier and include multiple parameterized types!
+	# We can get a little bit crazier and include multiple generic types!
 	struct Point3{T <: Number, U <: Number}
 		x::T
 		y::U
@@ -377,7 +347,7 @@ end
 md"""
 ## Control Flow
 
-In almost every programming scenario, we will need to check that specific conditions have been met before we can execute certain code. These conditions are represented as **conditional statements**, which are instructions that check whether a condition holds true or false. This is achieved with **boolean types** (either `true` or `false`, `1` or `0`) which are also primitive types.
+In almost every programming scenario, we will need to check that specific conditions have been met before we can continue. These conditions are represented as **conditional statements**, which are instructions that check whether a condition holds true or false. This is achieved with **boolean types** (either `true` or `false`) which are also primitive types.
 """
 
 # ╔═╡ da59f8cd-35de-43b0-bd8e-762221c87e58
@@ -430,7 +400,7 @@ There are many more operators that exist, many of which exist to simplify a numb
 # ╔═╡ 19a15137-839e-49db-8b1e-0f3bdb6473b9
 begin
 	result = 1; println(result)
-	result += 2; println(result) # same as num = num + 10 (addition)
+	result += 2; println(result) # same as num = num + 2 (addition)
 	result -= 1; println(result) # same as num = num - 2 (subtraction)
 	result /= 2; println(result) # same as num = num / 2 (division)
 	result *= 10; println(result) # same as num = num * 10 (multiplication)
@@ -469,7 +439,7 @@ md"""
 
 A **loop** represents a specific instruction to either _select_ or _repeat_ other instructions depending on one or many conditions.
 
-The **for loop** allows for **iterating**, or repeating over, a number of elements. For example, if we want to print every element in a container:
+The **for loop** allows for **iterating**, or repeating over, a number of elements. For example, if we want to print every element in a collection:
 """
 
 # ╔═╡ 62a0c7f0-fdd3-4b2e-9006-0bdd7eb86ca2
@@ -490,12 +460,12 @@ i = 1
 # ╔═╡ d997dfd1-ccb7-437d-ac46-f5ffe05e6e4c
 while i < 10
 	println(i)
-	i += 1
+	i = i + 1
 end
 
 # ╔═╡ c00fdd3b-ecc7-4182-b909-7845606184b2
 md"""
-Be **very** careful with loops, since if you do not eventually have the condition fail, you will have created what is known as an **infinite loop** which will continue forever and eventually cause a crash!
+Be **very** careful with loops, since if you do not eventually have the condition fail, you will have created what is known as an **infinite loop** which will continue looping forever and eventually cause a crash!
 """
 
 # ╔═╡ 921c48a1-fd9d-478e-b5fd-5361d41c7f0a
@@ -507,11 +477,6 @@ Be **very** careful with loops, since if you do not eventually have the conditio
 # while true
 #	println("I CAN LIVE FOREVER!")
 # end
-
-# ╔═╡ 60ac6130-f454-4f47-9ed9-cab35437de55
-md"""
-If do you end up with an infinite loop, in spite of my legal warnings (therefore, no refunds for this free workshop), on most operating systems the `CTRL + c` command is there to interrupt the program.
-"""
 
 # ╔═╡ 858aa086-21bf-4a66-94ec-b4e76834778e
 md"""
@@ -547,20 +512,14 @@ begin
 	end
 	
 	# This function adds two arguments of type Int together and returns the
-	# result. We have also declared the type of the return value in this case
-	function add_4(num1::Int, num2::Int)::Int
+	# result. We have also declared the type of the output in this case
+	function add_nums(num1::Int, num2::Int)::Int
 		return num1 + num2
 	end
 	
 	# This is another way to write a one-line function
 	add_5(num1::Int, num2::Int) = num1 + num2
 end
-
-# ╔═╡ 4670652b-653c-407c-a031-dbd97c41ffc4
-md"""
-> **Note**
-> In Julia, every line of code, or **statement**, is an **expression**, meaning that they always return _something_ even when we do not declare such. Therefore, the `hello_world()` function does return a value, but that value is of type `Nothing`, meaning there is an absence of any value being returned.
-"""
 
 # ╔═╡ 1129fabc-6593-47f1-9c6a-a435fdc910a8
 md"""
@@ -585,7 +544,7 @@ Given an integer `n`, return a specific string based on the following conditions
 - `""` (empty string) if none of the other conditions are true
 
 > **Hint**
-> You can use the modulo operator (`%`) to determine if a number is divisible. For example, `fizzbuzz(18)` means that the argument `n` is equal to 18, and `n % 3 == 0` returns `true` because 18 is divisible by 3 with no remainder. 
+> You can use the modulo operator (`%`) to determine if a number is divisible by another. For example, `fizzbuzz(18)` means that the argument `n` is equal to 18, and `n % 3 == 0` returns `true` because 18 is divisible by 3 with no remainder. 
 
 > **Hint**
 > Programming languages _iterate_ over each line from top to bottom. Therefore in your `if/else` statement, watch out for which condition is checked first by the program!
@@ -602,19 +561,13 @@ begin
 	@test fizzbuzz(25) == "Buzz"
 	@test fizzbuzz(21) == "Fizz"
 	@test fizzbuzz(19) == ""
-	# The map function applies the function fizzbuzz to a range of numbers
-	# which will act as arguments
+	# Here, we are testing your function with a macro (metaprogramming feature) to see if it returns the correct output for the first 15 numbers
 	@test map(fizzbuzz, 1:15) == ["", "", "Fizz", "", "Buzz", "Fizz", "", "", "Fizz", "Buzz", "", "Fizz", "", "", "FizzBuzz"]
 end
 
-# ╔═╡ b5882f37-1243-4062-82ba-54a967b6f620
-md"""
-The `@test` macro, or any Julia function with an `@` symbol in the beginning of the name, are special metaprogramming functions that do not actually run anything. They only manipulate code. 
-"""
-
 # ╔═╡ 5f117a8c-31a7-4659-b0a7-1b40bb05f095
 md"""
-Hidden in the next cell is an over the top version of the original FizzBuzz function wherein we return a collection of strings mapped to "Fizz", "Buzz", etc. We are exploiting more metaprogramming capabilities (`quote ... end` blocks) to achieve our aims by manipulating code first before running it with `eval`. We would definitely revisit in greater detail macros and other metaprogramming concepts in some future workshop, though it is a rather advanced subject that even the organizer of this workshop struggles immensely with. There is also the concept of **higher-order functions** such as the `map` function that can take another function as an argument (everything between `fizzbuzz2` and the last `end` is essentially a function):
+Hidden in the next cell is an over the top version of the original FizzBuzz function wherein we exploit more advanced metaprogramming features:
 """
 
 # ╔═╡ 4fe9f0ba-68f7-48af-a871-1d3617c64f46
@@ -633,7 +586,7 @@ fizzbuzz2(15)
 
 # ╔═╡ c055d043-589f-4776-9a04-ee090a7c2daf
 md"""
-Here is one more version that utilizes Julia's built-in broadcasting feature, which is basically a way to use the map function with a dot. You can learn more about it [here](https://docs.julialang.org/en/v1/manual/functions/#Function-composition-and-piping).
+Here is one more version of fizzbuzz that utilizes Julia's built-in broadcasting feature, which works similarly to the map function. You can learn more about it [here](https://docs.julialang.org/en/v1/manual/functions/#Function-composition-and-piping).
 """
 
 # ╔═╡ 497b430f-b70d-42fa-968a-3ab5bb1165ff
