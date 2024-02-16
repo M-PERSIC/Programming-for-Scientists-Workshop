@@ -117,7 +117,7 @@ There are two steps happening here:
 - **Declaration** (create, or "declare", the variable)
 - **Initialization** (tie the variable to a **value**, meaning instance of data)
 
-A third step, called **assignment**, is when the value of a variable is changed:
+A third step, called **assignment**, is when the value of a variable is changed (for example, we change `x` to 2 with `x = 2`).
 """
 
 # ╔═╡ 71fef82f-5494-480c-a825-76771b7383f8
